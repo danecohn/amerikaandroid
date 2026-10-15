@@ -9,7 +9,14 @@
     "userInterfaceStyle": "dark",
     "plugins": [
       "expo-secure-store",
-      "expo-iap",
+      [
+        "expo-iap",
+        {
+          "android": {
+            "store": "google"
+          }
+        }
+      ],
       [
         "expo-image-picker",
         {
@@ -57,9 +64,12 @@
         "android.permission.READ_MEDIA_IMAGES",
         "android.permission.READ_MEDIA_VIDEO",
         "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE"
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
       ],
-      "softwareKeyboardLayoutMode": "resize"
+      "softwareKeyboardLayoutMode": "resize",
+      "allowBackup": false
     }
   }
 }
