@@ -46,3 +46,9 @@ xcode-build.log
 # generated native folders
 /ios
 /android
+
+# Local distribution artifacts
+release/
+*.aab
+*.apk
+*.apks
