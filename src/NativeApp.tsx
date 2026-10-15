@@ -77,7 +77,7 @@ function AppContent() {
     [text, setText] = useState("");
   const requestEpoch = useRef(0);
   const route = stack.at(-1);
-  useEffect(()=>{const listener=BackHandler.addEventListener('hardwareBackPress',()=>{if(list){setList('');return true;}if(stack.length){clear();setStack(old=>old.slice(0,-1));return true;}if(feature){setFeature(null);return true;}if(tab!=='home'){clear();setTab('home');return true;}return false;});return ()=>listener.remove();},[list,stack.length,feature,tab]);
+  useEffect(()=>{const listener=BackHandler.addEventListener('hardwareBackPress',()=>{if(feature){setFeature(null);return true;}if(list){setList('');return true;}if(stack.length){clear();setStack(old=>old.slice(0,-1));return true;}if(tab!=='home'){clear();setTab('home');return true;}return false;});return ()=>listener.remove();},[list,stack.length,feature,tab]);
   const updated=async()=>setMe((await api.request<{actor:Actor}>("me")).actor);
   const showFeature=(name:Feature)=>{if(!me){setAuth(true);return;}setDatingThread(undefined);setFeature(name);};
   const clear = () => {
