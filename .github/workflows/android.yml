@@ -1,0 +1,74 @@
+name: Android native build
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      CI: '1'
+      NODE_OPTIONS: --max-old-space-size=6144
+      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.workers.max=2
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: pnpm/action-setup@v6
+        with:
+          version: '11.25.0'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck && pnpm check:jsx && pnpm test
+      - run: pnpm exec expo install --check
+      - run: pnpm exec expo prebuild --platform android --no-install
+      - name: Compile native APK and Play App Bundle
+        working-directory: android
+        run: ./gradlew :app:assembleRelease :app:bundleRelease --no-daemon --max-workers=2 > ../android-build.log 2>&1 || { tail -n 150 ../android-build.log; exit 1; }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Amerika-Social-Android-native
+          path: |
+            android/app/build/outputs/apk/release/*.apk
+            android/app/build/outputs/bundle/release/*.aab
+          retention-days: 30
+      - name: Launch on Android
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          script: |
+            cd android && ./gradlew :app:assembleDebug --no-daemon --max-workers=2 > ../android-debug.log 2>&1 && cd ..
+            adb install android/app/build/outputs/apk/debug/app-debug.apk
+            pnpm exec expo start --localhost --port 8081 > metro.log 2>&1 &
+            adb reverse tcp:8081 tcp:8081
+            adb shell am start -n social.amerika.android/.MainActivity
+            sleep 50
+            adb shell uiautomator dump /sdcard/amerika-ui.xml
+            adb pull /sdcard/amerika-ui.xml android-ui.xml
+            adb exec-out screencap -p > android-preview.png
+            adb logcat -d -s AndroidRuntime:E > android-runtime.log
+            test ! -s android-runtime.log
+            grep -Ei 'Friends|Sign in|Amerika|conversation' android-ui.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Android-validation
+          path: |
+            android-preview.png
+            android-ui.xml
+            android-runtime.log
+            android-build.log
+            android-debug.log
+            metro.log
