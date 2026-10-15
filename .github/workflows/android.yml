@@ -51,12 +51,12 @@ jobs:
           profile: pixel_6
           disable-animations: true
           script: |
-            cd android && ./gradlew :app:assembleDebug --no-daemon --max-workers=2 > ../android-debug.log 2>&1 && cd ..
-            adb install android/app/build/outputs/apk/debug/app-debug.apk
-            pnpm exec expo start --localhost --port 8081 > metro.log 2>&1 &
-            adb reverse tcp:8081 tcp:8081
+            APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner | sort -V | tail -1)
+            "$APKSIGNER" sign --ks android/app/debug.keystore --ks-pass pass:android --out AmerikaSocial-testing.apk android/app/build/outputs/apk/release/app-release-unsigned.apk
+            adb install AmerikaSocial-testing.apk
+            adb logcat -c
             adb shell am start -n social.amerika.android/.MainActivity
-            sleep 50
+            sleep 30
             adb shell uiautomator dump /sdcard/amerika-ui.xml
             adb pull /sdcard/amerika-ui.xml android-ui.xml
             adb exec-out screencap -p > android-preview.png
@@ -74,3 +74,4 @@ jobs:
             android-build.log
             android-debug.log
             metro.log
+            AmerikaSocial-testing.apk
