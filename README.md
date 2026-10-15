@@ -24,7 +24,7 @@ Use Java 17 and Android SDK for local native builds. The GitHub workflow compile
 
 ## Publishing
 
-Package: `social.amerika.android`. Version 1.0.0, versionCode 1. Google Play accepts a signed Android App Bundle (`.aab`), not the source ZIP. No Play Console account or upload key has been supplied. Unsigned CI artifacts must be signed before upload; debug APKs are for testing only. EAS `production` generates an app bundle and manages upload signing after you connect your Expo project and credentials. Use `pnpm dlx eas-cli@latest build --platform android --profile production`, then upload to an internal testing track first.
+Package: `social.amerika.android`. Version 1.0.0, versionCode 1. Google Play accepts a signed Android App Bundle (`.aab`), not the source ZIP. No Play Console account has been supplied. A dedicated local upload key has been generated outside OneDrive; see PLAY-STORE.md. Unsigned CI artifacts must be signed before upload; testing APKs are for testing only. EAS `production` generates an app bundle and manages upload signing after you connect your Expo project and credentials. Use `pnpm dlx eas-cli@latest build --platform android --profile production`, then upload to an internal testing track first.
 
 Secrets never belong in this repository. The optional native signing plugin reads AMERIKA_UPLOAD_STORE_FILE, AMERIKA_UPLOAD_STORE_PASSWORD, AMERIKA_UPLOAD_KEY_ALIAS and AMERIKA_UPLOAD_KEY_PASSWORD from the build environment. Without them Release builds remain unsigned rather than using the debug key.
 
