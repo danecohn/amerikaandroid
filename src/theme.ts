@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 export const colors = {
-  red: "#C62832",
-  black: "#0A0A0B",
-  card: "#161617",
-  border: "#303033",
+  red: "#7F9DA3",
+  black: "#14252F",
+  card: "#203640",
+  border: "#3B545A",
   white: "#FFFFFF",
-  muted: "#ADADB5",
+  muted: "#B0C0BB",
 };
 export const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.black },

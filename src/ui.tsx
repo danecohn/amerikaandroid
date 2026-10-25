@@ -267,5 +267,8 @@ export function Page({
   return <PageRefreshContext.Provider value={tasks}><SafeAreaView style={s.screen}><View style={[s.header, s.spread]}><Text style={[s.title, {
         fontSize: 22,
         flex: 1
-      }]}>{title}</Text><Icon name="refresh" label="Refresh page" onPress={() => void refresh()} /><Icon name="close" label="Close" onPress={onClose} /></View><ScrollView testID="feature-page-scroll" alwaysBounceVertical refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => void refresh()} tintColor={colors.red} />} keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}>{children}</ScrollView></SafeAreaView></PageRefreshContext.Provider>;
+      }]}>{title}</Text><Icon name="refresh" label="Refresh page" onPress={() => void refresh()} /><Icon name="close" label="Close" onPress={onClose} /></View><ScrollView testID="feature-page-scroll" alwaysBounceVertical refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => void refresh()} tintColor={colors.red} />} keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}>{children}<Text accessibilityRole="text" style={[s.muted,{fontSize:11,textAlign:"center",paddingVertical:16}]}>A product of Artemis Softworks LLC</Text></ScrollView></SafeAreaView></PageRefreshContext.Provider>;
 }
+
+export const SOFTWARE_PUBLISHER = "Artemis Softworks LLC";
+export const SOFTWARE_FOUNDER = "Demetria Althea Cohn";
