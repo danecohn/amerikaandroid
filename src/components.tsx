@@ -33,7 +33,7 @@ export function Button({
       onPress={onPress}
       style={[s.button, secondary && s.secondary, disabled && { opacity: 0.4 }]}
     >
-      <Text style={s.buttonText}>{title}</Text>
+      <Text style={[s.buttonText, secondary && {color: colors.white}]}>{title}</Text>
     </Pressable>
   );
 }

@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 export const colors = {
-  red: "#7F9DA3",
-  black: "#14252F",
-  card: "#203640",
-  border: "#3B545A",
-  white: "#FFFFFF",
-  muted: "#B0C0BB",
+  red: "#0066cc",
+  black: "#f5f5f7",
+  card: "#ffffff",
+  border: "#d5dce8",
+  white: "#1d1d1f",
+  muted: "#62646b",
 };
 export const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.black },
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     borderColor: colors.border,
     borderWidth: 1,
   },
-  buttonText: { color: colors.white, fontWeight: "700", fontSize: 15 },
+  buttonText: { color: "#FFFFFF", fontWeight: "700", fontSize: 15 },
   card: {
     padding: 18,
     borderBottomWidth: 1,
@@ -65,9 +65,9 @@ export const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   badge: { color: colors.red, fontWeight: "700" },
-  error: { color: "#FF9298", fontSize: 14, lineHeight: 21 },
+  error: { color: "#b42332", fontSize: 14, lineHeight: 21 },
   empty: { padding: 32, alignItems: "center", gap: 12 },
-  hero: { backgroundColor: colors.red, padding: 24, gap: 12 },
+  hero: { backgroundColor: "#eaf2ff", padding: 24, gap: 12 },
   logo: {
     width: 44,
     height: 44,

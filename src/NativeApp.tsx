@@ -658,7 +658,7 @@ function AppContent() {
             }[tab];
   return (
     <SafeAreaView style={s.screen} edges={["top", "left", "right"]}>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <View style={[s.header, s.row]}>
         {route ? (
           <Icon
