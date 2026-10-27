@@ -66,7 +66,7 @@ jobs:
             adb exec-out screencap -p > android-preview.png
             adb logcat -d -v brief -s AndroidRuntime:E | sed '/^--------- beginning of/d' > android-runtime.log
             test ! -s android-runtime.log
-            grep -Ei 'Friends|Sign in|Amerika|conversation' android-ui.xml
+            grep -Ei 'Friends|Sign in|Vigil|conversation' android-ui.xml
       - uses: actions/upload-artifact@v4
         if: always()
         with:

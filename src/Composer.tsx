@@ -129,7 +129,7 @@ export default function Composer({
           autoFocus
           value={text}
           onChangeText={setText}
-          placeholder="Make friends. Share a thought."
+          placeholder="Share a thought."
           placeholderTextColor={colors.muted}
           style={[s.input, { minHeight: 180, textAlignVertical: "top" }]}
         />

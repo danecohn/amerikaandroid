@@ -5,6 +5,7 @@ import {
   AppState,
   BackHandler,
   FlatList,
+  Image,
   KeyboardAvoidingView,
   Linking,
   Modal,
@@ -14,6 +15,7 @@ import {
   ScrollView,
   Text,
   TextInput,
+  useColorScheme,
   View,
 } from "react-native";
 import {
@@ -41,7 +43,7 @@ import FeatureHost, {Feature} from "./FeatureHost";
 import {unregisterThisDevice,storedPushDeviceId} from "./PushSettings";
 import * as Notifications from "expo-notifications";
 import {nativePushAvailable,notificationActivity} from "./activity";
-import { colors, styles as s } from "./theme";
+import { applyScheme, colors, currentScheme, styles as s } from "./theme";
 function AppContent() {
   const insets = useSafeAreaInsets();
   const [me, setMe] = useState<Actor | null>(null),
@@ -341,10 +343,10 @@ function AppContent() {
     header = (
       <>
         <View style={s.hero}>
-          <Text style={s.title}>Why Can’t We{"\n"}Be Friends?</Text>
-          <Text style={s.text}>Make friends. Grow stronger together.</Text>
+          <Text style={s.title}>Vigil Social</Text>
+          <Text style={s.text}>Posts from people and agents, newest first.</Text>
           <Text style={[s.muted, { color: colors.white }]}>
-            Free speech. Newest first. No paid boosts.
+            No paid boosts.
           </Text>
         </View>
         <View style={s.tabs}>
@@ -469,13 +471,13 @@ function AppContent() {
               <View
                 style={{
                   backgroundColor:
-                    item.sender === me?.id ? colors.red : colors.card,
+                    item.sender === me?.id ? colors.mine : colors.theirs,
                   padding: 14,
                   borderRadius: 14,
                   maxWidth: "85%",
                 }}
               >
-                <Text style={s.text}>{item.text}</Text>
+                <Text style={[s.text, item.sender === me?.id && { color: colors.onMine }]}>{item.text}</Text>
               </View>
             </View>
           )}
@@ -578,7 +580,7 @@ function AppContent() {
     content = (
         <ScrollView alwaysBounceVertical refreshControl={rc} contentContainerStyle={s.content}>
         <Person actor={me} />
-        {(["developers","communities","dating","explore","account"] as Feature[]).map(name=><Button key={name} secondary title={{developers:"Developer hub",communities:"Amerika Communities",dating:"Amerika Dating",explore:"Discover & hashtags",account:"Account settings",moderation:"Moderation"}[name]} onPress={()=>showFeature(name)}/>)}
+        {(["developers","communities","dating","explore","account"] as Feature[]).map(name=><Button key={name} secondary title={{developers:"Developer hub",communities:"Vigil Communities",dating:"Vigil Dating",explore:"Discover & hashtags",account:"Account settings",moderation:"Moderation"}[name]} onPress={()=>showFeature(name)}/>)}
         {(me.admin||me.moderator)&&<Button secondary title="Moderation & administration" onPress={()=>showFeature("moderation")}/>}
         <Text style={s.text}>{me.bio}</Text>
         <Text style={s.muted}>
@@ -586,7 +588,7 @@ function AppContent() {
             ? "Plus · 833 characters"
             : "Standard · 300 characters, 3 original posts per hour"}
         </Text>
-        <Button title="Amerika Social Plus" onPress={() => setPlus(true)} />
+        <Button title="Vigil Social Plus" onPress={() => setPlus(true)} />
         <Button
           secondary
           title="My profile"
@@ -629,7 +631,7 @@ function AppContent() {
     return (
       <SafeAreaView style={s.screen}>
         <View style={s.empty}>
-          <Text style={s.title}>Amerika Social</Text>
+          <Text style={s.title}>Vigil Social</Text>
           {error ? (
             <>
               <Text style={s.error}>{error}</Text>
@@ -650,7 +652,7 @@ function AppContent() {
         : route?.kind === "bots"
           ? "Your bots"
           : {
-              home: "Amerika",
+              home: "Vigil",
               friends: "Friends",
               alerts: "Notifications",
               inbox: "Messages",
@@ -658,7 +660,7 @@ function AppContent() {
             }[tab];
   return (
     <SafeAreaView style={s.screen} edges={["top", "left", "right"]}>
-      <StatusBar style="dark" />
+      <StatusBar style={currentScheme() === "dark" ? "light" : "dark"} />
       <View style={[s.header, s.row]}>
         {route ? (
           <Icon
@@ -671,9 +673,11 @@ function AppContent() {
             }}
           />
         ) : (
-          <View style={[s.logo, { width: 32, height: 32 }]}>
-            <Text style={[s.label, { fontSize: 25 }]}>A</Text>
-          </View>
+          <Image
+            accessibilityLabel="Vigil Social"
+            source={require("../assets/favicon.png")}
+            style={{ width: 32, height: 32, borderRadius: 8 }}
+          />
         )}
         <Text numberOfLines={1} style={[s.title, { fontSize: 22, flex: 1 }]}>
           {title}
@@ -813,6 +817,7 @@ function AppContent() {
   );
 }
 export default function App() {
+  applyScheme(useColorScheme());
   return (
     <SafeAreaProvider>
       <AppContent />

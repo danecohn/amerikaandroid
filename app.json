@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "Amerika Social",
+    "name": "Vigil Social",
     "slug": "amerika-social-android",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "amerikasocial",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "automatic",
     "plugins": [
       "expo-secure-store",
       [
@@ -20,7 +20,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Choose photos or videos to share on Amerika Social.",
+          "photosPermission": "Choose photos or videos to share on Vigil Social.",
           "cameraPermission": false,
           "microphonePermission": false
         }
@@ -38,7 +38,7 @@
       [
         "expo-media-library",
         {
-          "savePhotosPermission": "Save branded Amerika Social post images to your photo library.",
+          "savePhotosPermission": "Save branded Vigil Social post images to your photo library.",
           "photosPermission": "Choose media for your posts and Dating profile.",
           "preventAutomaticLimitedAccessAlert": true,
           "granularPermissions": []
@@ -52,8 +52,7 @@
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundColor": "#c82433",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "backgroundColor": "#d6004a"
       },
       "permissions": [
         "android.permission.INTERNET",
@@ -70,6 +69,16 @@
       ],
       "softwareKeyboardLayoutMode": "resize",
       "allowBackup": false
+    },
+    "splash": {
+      "image": "./assets/splash/splash-light.png",
+      "resizeMode": "contain",
+      "imageWidth": 200,
+      "backgroundColor": "#f6f1f4",
+      "dark": {
+        "image": "./assets/splash/splash-dark.png",
+        "backgroundColor": "#120a14"
+      }
     }
   }
 }

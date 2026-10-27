@@ -83,7 +83,7 @@ export default function Auth({
           title="Save codes privately"
           onPress={() =>
             void Share.share({
-              message: "PRIVATE Amerika recovery codes\n" + codes.join("\n"),
+              message: "PRIVATE Vigil recovery codes\n" + codes.join("\n"),
             })
           }
         />
@@ -137,11 +137,11 @@ export default function Auth({
       >
         <View style={s.spread}>
           <Text style={s.title}>
-            {register ? "Join Amerika" : "Welcome back"}
+            {register ? "Join Vigil Social" : "Welcome back"}
           </Text>
           <Icon name="close" label="Close sign in" onPress={onClose} />
         </View>
-        <Text style={s.muted}>Why Can’t We Be Friends?</Text>
+        <Text style={s.muted}>A product of VigilTech.</Text>
         {register && input("Display name", name, setName)}
         {input("Username", handle, setHandle)}
         {input(

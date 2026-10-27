@@ -31,9 +31,14 @@ export function Button({
       accessibilityRole="button"
       disabled={disabled}
       onPress={onPress}
-      style={[s.button, secondary && s.secondary, disabled && { opacity: 0.4 }]}
+      style={({ pressed }) => [
+        s.button,
+        secondary && s.secondary,
+        pressed && !disabled && { backgroundColor: secondary ? colors.border : colors.primaryPressed },
+        disabled && s.buttonDisabled,
+      ]}
     >
-      <Text style={[s.buttonText, secondary && {color: colors.white}]}>{title}</Text>
+      <Text style={[s.buttonText, secondary && {color: colors.white}, disabled && s.buttonTextDisabled]}>{title}</Text>
     </Pressable>
   );
 }

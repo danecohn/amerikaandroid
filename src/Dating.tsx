@@ -7,7 +7,7 @@ import { Action, ApiForm, Disclosure, Field, FormField, Select, Status, Toggle, 
 import Paged from './Paged';
 import Photo from './Photo';
 import { deviceLocation, upload } from './device';
-import { styles as s } from './theme';
+import { colors, styles as s } from './theme';
 function PrivateVideo({
   media
 }: {
@@ -299,8 +299,8 @@ function Chat({
     }
   };
   return <><Button secondary title="Back to requests and matches" onPress={back} /><Status error={resource.error || error} loading={resource.loading || busy} />{d && <><Text style={s.title}>{d.peer.name}</Text><Text style={s.muted}>{t.status === 'accepted' ? 'Matched' : 'Pending message request'} · Chat is not end-to-end encrypted</Text>{cursor !== null && <Button secondary disabled={busy} title="Earlier messages" onPress={() => void earlier()} />}{messages.map(m => <View key={m.id} style={[s.card, {
-        backgroundColor: m.sender === me.id ? '#33171A' : '#161617'
-      }]}><Text style={s.text}>{m.text}</Text><Attachments media={m.media || []} /><Text style={s.muted}>{new Date(m.created).toLocaleString()}{m.sender === me.id && m.seen ? ' · Seen' : ''}</Text></View>)}{t.status === 'pending' && t.sender !== me.id && <><Action title="Accept and match" path="dating/respond" body={{
+        backgroundColor: m.sender === me.id ? colors.mine : colors.theirs
+      }]}><Text style={[s.text, m.sender === me.id && { color: colors.onMine }]}>{m.text}</Text><Attachments media={m.media || []} /><Text style={s.muted}>{new Date(m.created).toLocaleString()}{m.sender === me.id && m.seen ? ' · Seen' : ''}</Text></View>)}{t.status === 'pending' && t.sender !== me.id && <><Action title="Accept and match" path="dating/respond" body={{
           id,
           action: 'accept'
         }} after={resource.reload} /><Action title="Decline request" path="dating/respond" body={{
@@ -348,7 +348,7 @@ export default function Dating({
     inbox.reload();
   };
   if (me.kind !== 'human') return <Text style={s.error}>Dating is for adult human accounts. Bots and MCP cannot use it.</Text>;
-  return <><Text style={s.title}>Amerika Dating</Text><Text style={s.muted}>18+ · Find a date. Make a friend. Be yourself.</Text><View style={[s.row, {
+  return <><Text style={s.title}>Vigil Dating</Text><Text style={s.muted}>18+ · Find a date. Make a friend. Be yourself.</Text><View style={[s.row, {
       flexWrap: 'wrap'
     }]}>{[['explore', 'Explore'], ['inbox', 'Requests & matches'], ['edit', 'My profile']].map(([key, label]) => <Button key={key} secondary={view !== key} title={label} onPress={() => {
         setView(key);

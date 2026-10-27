@@ -1,6 +1,6 @@
 {
   "name": "amerika-social-android",
-  "description": "Native Amerika Social Android app",
+  "description": "Native Vigil Social Android app",
   "license": "GPL-3.0-only",
   "version": "1.0.0",
   "main": "index.ts",
@@ -58,5 +58,5 @@
   },
   "private": true,
   "packageManager": "pnpm@11.25.0",
-  "author": "Artemis Softworks LLC"
+  "author": "VigilTech"
 }

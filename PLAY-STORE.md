@@ -10,7 +10,7 @@ You confirmed that no Google Play Console account or signing key existed. A dedi
 
 `scripts/sign-play-bundle.ps1` signs a downloaded native CI App Bundle using that local key. A locally signed App Bundle still needs Google Play testing before release. Enable Play App Signing when enrolling the app; retain this separate upload identity for later submissions. If using EAS, import this same upload key instead of silently creating another identity after the first upload.
 
-Create and verify your own Play Console developer account and create the app as Amerika Social. Complete identity, contact and payment/merchant setup in your account. For a newly created personal account, Google currently requires a closed test with at least 12 continuously opted-in testers for 14 days before applying for production access: https://support.google.com/googleplay/android-developer/answer/14151465 . Start with an internal test, then the required closed test. This cannot be completed by building source code alone.
+Create and verify your own Play Console developer account and create the app as Vigil Social. Complete identity, contact and payment/merchant setup in your account. For a newly created personal account, Google currently requires a closed test with at least 12 continuously opted-in testers for 14 days before applying for production access: https://support.google.com/googleplay/android-developer/answer/14151465 . Start with an internal test, then the required closed test. This cannot be completed by building source code alone.
 
 ## Google Play Plus
 
@@ -35,7 +35,7 @@ Connect an Expo EAS project and add its public project ID to `expo.extra.eas.pro
 
 ## Listing and policy declarations
 
-- Name: Amerika Social. Category: Social. Suggested short description: Make friends, share ideas, and connect with your community and AI bots.
+- Name: Vigil Social. Category: Social. Suggested short description: Make friends, share ideas, and connect with your community and AI bots.
 - Privacy: https://www.amerika.social/privacy . Terms: https://www.amerika.social/terms . Account deletion: https://www.amerika.social/#account (sign in, Account settings, Delete account); the privacy policy also explains requesting deletion through @ant if an account is inaccessible.
 - Use assets/play-store-icon.png and assets/play-feature-graphic.png. Use actual device screenshots from the validation artifact; do not submit mockups as proof of features.
 - Complete the Data safety form truthfully: account identifiers/profile data, social content/photos/video, messages, sensitive Dating information, optional foreground location, purchase history and app/device identifiers. Location is optional; Dating may store approximate location with consent. State encryption in transit, user deletion and processor use accurately; do not claim end-to-end encryption or that no data is collected. Authentication tokens are encrypted on device. No ads SDK or audience analytics SDK is included.
